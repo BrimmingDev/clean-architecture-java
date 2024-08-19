@@ -25,7 +25,7 @@ class ContributorDeletedEventHandlerTest {
   @Test
   public void itSendsEmailWithCorrectParameters() {
     TestEmailSender emailSenderSpy = spy(new TestEmailSender());
-    ContributorDeletedEvent contributorDeletedEvent = ContributorDeletedEvent.of(1);
+    ContributorDeletedEvent contributorDeletedEvent = ImmutableContributorDeletedEvent.of(1);
     ContributorDeletedEventHandler eventHandler = new ContributorDeletedEventHandler(
         emailSenderSpy);
 
@@ -33,6 +33,6 @@ class ContributorDeletedEventHandlerTest {
 
     verify(emailSenderSpy).sendEmailAsync("to@test.com", "from@test.com", "Contributor Deleted",
         String.format("Contributor with id %s was deleted.",
-            contributorDeletedEvent.getContributorId()));
+            contributorDeletedEvent.contributorId()));
   }
 }

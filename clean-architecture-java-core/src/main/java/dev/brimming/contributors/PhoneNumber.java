@@ -1,6 +1,7 @@
-package dev.brimming;
+package dev.brimming.contributors;
 
 import com.google.errorprone.annotations.Immutable;
+import dev.brimming.helpers.DefaultStyle;
 import java.util.Optional;
 
 @Immutable

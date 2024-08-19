@@ -21,7 +21,7 @@ public class ContributorDeletedEventHandler implements EventHandler<ContributorD
     emailSender.sendEmailAsync("to@test.com",
         "from@test.com",
         "Contributor Deleted",
-        String.format("Contributor with id %s was deleted.", event.getContributorId())).join();
+        String.format("Contributor with id %s was deleted.", event.contributorId())).join();
 
     return CompletableFuture.completedFuture(null);
   }

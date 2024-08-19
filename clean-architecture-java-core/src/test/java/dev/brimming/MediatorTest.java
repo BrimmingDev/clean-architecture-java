@@ -1,17 +1,16 @@
 package dev.brimming;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import dev.brimming.baseclasses.AbstractBaseDomainEvent;
+import dev.brimming.baseclasses.BaseDomainEvent;
+import dev.brimming.helpers.Mediator;
 import dev.brimming.interfaces.EventHandler;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -31,7 +30,7 @@ class MediatorTest {
 
   @BeforeEach
   void setUp() {
-    Map<String, List<EventHandler<? extends AbstractBaseDomainEvent>>> eventHandlers = new HashMap<>();
+    Map<String, List<EventHandler<? extends BaseDomainEvent>>> eventHandlers = new HashMap<>();
     eventHandlers.put(MyEvent.class.getCanonicalName(), Arrays.asList(mockHandler1, mockHandler2));
     mediator = new Mediator(eventHandlers);
   }
@@ -52,7 +51,7 @@ class MediatorTest {
   }
 
   // Define mock event classes
-  private static class MyEvent extends AbstractBaseDomainEvent {
+  private static class MyEvent extends BaseDomainEvent {
 
   }
 }

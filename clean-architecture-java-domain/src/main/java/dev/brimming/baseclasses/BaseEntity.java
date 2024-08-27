@@ -12,15 +12,4 @@ public abstract class BaseEntity {
   public int id() {
     return 0;
   }
-
-  public static Builder builder() {
-    return ImmutableBaseEntity.builder();
-  }
-
-  public interface Builder {
-
-    Builder setId(int id);
-
-    BaseEntity build();
-  }
 }

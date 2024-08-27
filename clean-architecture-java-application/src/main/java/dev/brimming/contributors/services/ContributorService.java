@@ -2,7 +2,6 @@ package dev.brimming.contributors.services;
 
 import com.google.inject.Inject;
 import dev.brimming.contributors.Contributor;
-import dev.brimming.contributors.ContributorDeletedEvent;
 import dev.brimming.contributors.ContributorDto;
 import dev.brimming.contributors.ImmutableContributor;
 import dev.brimming.contributors.ImmutableContributorDeletedEvent;
@@ -45,8 +44,8 @@ public class ContributorService {
 
     repository.update(updatedContributor);
 
-    return Result.success(new ContributorDto(updatedContributor.id(), updatedContributor.name(),
-        updatedContributor.phoneNumber()));
+    return Result.success(new ContributorDto(updatedContributor.id(), updatedContributor.getName(),
+        updatedContributor.getPhoneNumber()));
   }
 
   public Result<?> DeleteContributor(long contributorId) {

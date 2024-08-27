@@ -19,7 +19,7 @@
   <dependencies>
     <dependency>
       <groupId>dev.brimming</groupId>
-      <artifactId>clean-architecture-java-core</artifactId>
+      <artifactId>clean-architecture-java-domain</artifactId>
       <version>1.0-SNAPSHOT</version>
       <scope>compile</scope>
     </dependency>

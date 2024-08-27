@@ -9,17 +9,15 @@ import org.junit.jupiter.api.Test;
 class ContributorTest {
 
   @Test
-  public void itDoesNotAllowEmptyName() {
+  public void itDoesNotAllowEmptyGetName() {
     assertThrows(IllegalArgumentException.class,
         () -> Instancio.create(ImmutableContributor.class).withName(""));
   }
 
   @Test
-  public void itDefaultsContributorStatusToNotSet() {
+  public void itDefaultsContributorGetStatusToNotSet() {
     Contributor contributor = ImmutableContributor.builder().setId(1).setName("blah").build();
-    Contributor blah = Contributor.builder().setId(1).setName("fdf")
-        .build();
 
-    assertThat(contributor.status()).isEqualTo(ContributorStatus.NOT_SET);
+    assertThat(contributor.getStatus()).isEqualTo(ContributorStatus.NOT_SET);
   }
 }

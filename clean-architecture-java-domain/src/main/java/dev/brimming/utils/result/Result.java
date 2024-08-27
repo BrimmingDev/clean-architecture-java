@@ -13,41 +13,41 @@ import org.immutables.value.Value.Immutable;
 public abstract class Result<T> {
 
   @Default
-  public ResultStatus status() {
+  public ResultStatus getStatus() {
     return ResultStatus.OK;
   }
 
   @Default
-  public List<String> errors() {
+  public List<String> getErrors() {
     return Collections.emptyList();
   }
 
   @Default
-  public List<ValidationError> validationErrors() {
+  public List<ValidationError> getValidationErrors() {
     return Collections.emptyList();
   }
 
   @Default
-  public Optional<String> successMessage() {
+  public Optional<String> getSuccessMessage() {
     return Optional.empty();
   }
 
   @Default
-  public Optional<String> correlationId() {
+  public Optional<String> getCorrelationId() {
     return Optional.empty();
   }
 
   @Default
-  public Optional<String> location() {
+  public Optional<String> getLocation() {
     return Optional.empty();
   }
 
-  public abstract T value();
+  public abstract T getValue();
 
   @Derived
   public boolean isSuccess() {
-    return status() == ResultStatus.OK || status() == ResultStatus.CREATED
-        || status() == ResultStatus.NO_CONTENT;
+    return getStatus() == ResultStatus.OK || getStatus() == ResultStatus.CREATED
+        || getStatus() == ResultStatus.NO_CONTENT;
   }
 
   public static <T> Result<T> success() {
@@ -79,8 +79,8 @@ public abstract class Result<T> {
 
   public static <T> Result<T> error(ErrorList error) {
     return ImmutableResult.<T>builder().setStatus(ResultStatus.ERROR)
-        .setCorrelationId(error.correlationId())
-        .addAllErrors(error.errorMessages()).build();
+        .setCorrelationId(error.getCorrelationId())
+        .addAllErrors(error.getErrorMessages()).build();
   }
 
   public static <T> Result<T> invalid(ValidationError validationError) {

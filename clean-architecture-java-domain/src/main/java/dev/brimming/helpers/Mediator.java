@@ -19,6 +19,7 @@ public class Mediator {
     this.eventHandlers = eventHandlers;
   }
 
+
   public <E extends BaseDomainEvent> void publish(E event) {
     publishAsync(event).join();
   }

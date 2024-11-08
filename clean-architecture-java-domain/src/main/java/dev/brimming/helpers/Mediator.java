@@ -12,13 +12,31 @@ import java.util.concurrent.CompletableFuture;
 public class Mediator {
 
   private final Map<String, List<EventHandler<? extends BaseDomainEvent>>> eventHandlers;
+  private final Map<Class<? extends Request<?>>, RequestHandler<? extends Request<?>, ?>> requestHandlers;
 
   @Inject
   public Mediator(
-      Map<String, List<EventHandler<? extends BaseDomainEvent>>> eventHandlers) {
+      Map<String, List<EventHandler<? extends BaseDomainEvent>>> eventHandlers,
+      Map<Class<? extends Request<?>>, RequestHandler<? extends Request<?>, ?>> requestHandlers) {
     this.eventHandlers = eventHandlers;
+    this.requestHandlers = requestHandlers;
   }
 
+  public <T> T send(Request<T> request) {
+    return sendAsync(request).join();
+  }
+
+  public <T> CompletableFuture<T> sendAsync(Request<T> request) {
+    @SuppressWarnings("unchecked")
+    RequestHandler<Request<T>, T> requestHandler = (RequestHandler<Request<T>, T>) requestHandlers.get(
+        request.getClass());
+
+    if (requestHandler == null) {
+      return CompletableFuture.completedFuture(null);
+    }
+
+    return requestHandler.handle(request);
+  }
 
   public <E extends BaseDomainEvent> void publish(E event) {
     publishAsync(event).join();
@@ -44,5 +62,13 @@ public class Mediator {
   private <E extends BaseDomainEvent> CompletableFuture<Void> handleEvent(
       EventHandler<? extends BaseDomainEvent> handler, E event) {
     return ((EventHandler<E>) handler).handle(event);
+  }
+
+  private <T> RequestHandler<Request<T>, T> getRequestHandler(
+      Class<? extends Request<T>> requestClass) {
+    @SuppressWarnings("unchecked")
+    RequestHandler<Request<T>, T> handler = (RequestHandler<Request<T>, T>) requestHandlers.get(
+        requestClass);
+    return handler;
   }
 }

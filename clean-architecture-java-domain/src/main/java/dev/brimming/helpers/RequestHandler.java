@@ -2,7 +2,7 @@ package dev.brimming.helpers;
 
 import java.util.concurrent.CompletableFuture;
 
-public interface RequestHandler<T extends Request<V>, V> {
+public interface RequestHandler<R extends Request<T>, T> {
 
-  CompletableFuture<V> handle(T request);
+  CompletableFuture<T> handle(R request);
 }

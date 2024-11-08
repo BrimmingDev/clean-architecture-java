@@ -32,7 +32,7 @@ class MediatorTest {
   void setUp() {
     Map<String, List<EventHandler<? extends BaseDomainEvent>>> eventHandlers = new HashMap<>();
     eventHandlers.put(MyEvent.class.getCanonicalName(), Arrays.asList(mockHandler1, mockHandler2));
-    mediator = new Mediator(eventHandlers);
+    mediator = new Mediator(eventHandlers, Map.of());
   }
 
   @Test

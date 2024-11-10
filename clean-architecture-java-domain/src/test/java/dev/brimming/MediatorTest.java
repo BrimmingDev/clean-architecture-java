@@ -3,9 +3,9 @@ package dev.brimming;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import dev.brimming.baseclasses.BaseDomainEvent;
-import dev.brimming.helpers.Mediator;
-import dev.brimming.interfaces.EventHandler;
+import dev.brimming.helpers.mediator.Event;
+import dev.brimming.helpers.mediator.Mediator;
+import dev.brimming.helpers.mediator.EventHandler;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -30,7 +30,7 @@ class MediatorTest {
 
   @BeforeEach
   void setUp() {
-    Map<String, List<EventHandler<? extends BaseDomainEvent>>> eventHandlers = new HashMap<>();
+    Map<String, List<EventHandler<? extends Event>>> eventHandlers = new HashMap<>();
     eventHandlers.put(MyEvent.class.getCanonicalName(), Arrays.asList(mockHandler1, mockHandler2));
     mediator = new Mediator(eventHandlers, Map.of());
   }
@@ -51,7 +51,7 @@ class MediatorTest {
   }
 
   // Define mock event classes
-  private static class MyEvent extends BaseDomainEvent {
+  private static class MyEvent implements Event {
 
   }
 }

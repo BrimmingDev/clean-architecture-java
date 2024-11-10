@@ -2,7 +2,7 @@ package dev.brimming.contributors;
 
 import com.google.inject.Inject;
 import dev.brimming.interfaces.EmailSender;
-import dev.brimming.interfaces.EventHandler;
+import dev.brimming.helpers.mediator.EventHandler;
 import java.util.concurrent.CompletableFuture;
 
 public class ContributorDeletedEventHandler implements EventHandler<ContributorDeletedEvent> {

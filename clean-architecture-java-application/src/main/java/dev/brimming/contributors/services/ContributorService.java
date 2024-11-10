@@ -7,7 +7,7 @@ import dev.brimming.contributors.ImmutableContributor;
 import dev.brimming.contributors.ImmutableContributorDeletedEvent;
 import dev.brimming.contributors.PhoneNumber;
 import dev.brimming.contributors.ContributorRepository;
-import dev.brimming.helpers.Mediator;
+import dev.brimming.helpers.mediator.Mediator;
 import dev.brimming.utils.result.Result;
 import java.util.Optional;
 

@@ -9,7 +9,7 @@ import org.immutables.value.Value.Immutable;
 public abstract class BaseEntity {
 
   @Default
-  public int id() {
+  public int getId() {
     return 0;
   }
 }

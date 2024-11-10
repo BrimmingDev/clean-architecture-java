@@ -30,7 +30,7 @@ public class ContributorService {
 
     Contributor createdContributor = repository.create(newContributor);
 
-    return Result.created(createdContributor.id());
+    return Result.created(createdContributor.getId());
   }
 
   public Result<ContributorDto> UpdateContributor(long contributorId, String newName) {
@@ -44,8 +44,9 @@ public class ContributorService {
 
     repository.update(updatedContributor);
 
-    return Result.success(new ContributorDto(updatedContributor.id(), updatedContributor.getName(),
-        updatedContributor.getPhoneNumber()));
+    return Result.success(
+        new ContributorDto(updatedContributor.getId(), updatedContributor.getName(),
+            updatedContributor.getPhoneNumber()));
   }
 
   public Result<?> DeleteContributor(long contributorId) {
